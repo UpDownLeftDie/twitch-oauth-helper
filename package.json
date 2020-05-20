@@ -1,5 +1,5 @@
 {
-  "name": "twitch-oauth-helper",
+  "name": "@updownleftdie/twitch-oauth-helper",
   "version": "1.0.0",
   "description": "Helps get and refresh client auth tokens",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "test": "node test.js"
   },
   "author": "UpDownLeftDie (Jared Kotoff)",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "node-fetch": "^2.6.0",
     "readline-sync": "^1.4.10"
