@@ -1,0 +1,16 @@
+{
+  "name": "twitch-oauth-helper",
+  "version": "1.0.0",
+  "description": "Helps get and refresh client auth tokens",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node text.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "readline-sync": "^1.4.10"
+  }
+}
