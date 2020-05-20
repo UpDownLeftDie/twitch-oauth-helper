@@ -11,21 +11,20 @@ async function createSessionFile() {
     const sessionFile = fs.readFileSync(sessionFileLocation, "utf8");
     session = JSON.parse(sessionFile);
   } catch (err) {
-    console.log("Session file doesn't exist. Creating...");
+    console.debug("Session file doesn't exist. Creating...");
 
     try {
       await fsWriteFile(sessionFileLocation, JSON.stringify({ twitch: {} }));
     } catch (err) {
       throw new Error("Failed to create twitch-session.json file");
     }
-    console.log("Created new session.json file!");
+    console.debug("Created new session.json file!");
   }
 }
 
 async function twitchAuthCode(settings) {
-  const { clientId, clientSecret, scope, redirectUri } = settings;
+  const { clientId, clientSecret, scope } = settings;
   const readlineSync = require("readline-sync");
-  // const redirectUri = "http://localhost";
   const scopeStr = scope ? `&scope=${scope}` : "";
   const url = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&client_secret=${clientSecret}&response_type=code&redirect_uri=${redirectUri}${scopeStr}`;
   console.log(url);
@@ -46,15 +45,15 @@ async function twitchAuthToken(settings, code) {
   };
 
   if (code) {
-    console.log("Getting a new Twitch token");
+    console.debug("Getting a new Twitch token");
     params = {
       ...params,
       code,
       grant_type: "authorization_code",
-      redirect_uri: "http://localhost",
+      redirect_uri: settings.redirectUri,
     };
   } else if (twitchSession.refreshToken) {
-    console.log("Refreshing Twitch token");
+    console.debug("Refreshing Twitch token");
     params = {
       ...params,
       grant_type: "refresh_token",
@@ -75,9 +74,9 @@ async function twitchAuthToken(settings, code) {
 async function updateSessionStorage(newSession) {
   try {
     await fsWriteFile(sessionFileLocation, JSON.stringify(newSession));
-    console.log("Successfully updated session!");
+    console.debug("Successfully updated session!");
   } catch (err) {
-    console.log("ERR updateSessionStorage:", err);
+    console.error("ERR updateSessionStorage:", err);
   }
   twitchSession = newSession;
   return newSession;
@@ -91,7 +90,7 @@ async function refreshTwitchToken(settings) {
 
   // Update the twitch portion of our sessions storage
   const response = await twitchAuthToken(settings, authCode);
-  console.log("New Twitch Auth token gotten!", response);
+  console.debug("New Twitch Auth token gotten!", response);
   const newSession = {
     clientId: settings.clientId,
     accessToken: response.access_token,
@@ -102,6 +101,9 @@ async function refreshTwitchToken(settings) {
 }
 
 async function getTwitchSession(settings, forceRefresh = false) {
+  settings.redirectUri = settings.redirectUri
+    ? settings.redirectUri
+    : "http://localhost";
   const { clientId } = settings;
   twitchSession = {
     clientId,

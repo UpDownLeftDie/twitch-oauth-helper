@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node text.js"
+    "test": "node test.js"
   },
-  "author": "",
+  "author": "UpDownLeftDie (Jared Kotoff)",
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^2.6.0",
