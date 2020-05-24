@@ -6,7 +6,11 @@
 
 ```javascript
 const getTwitchSession = require("./index");
-const twitchSession = await getTwitchSession({clientId: "...", clientSecret: "..." redirectUri: "http://localhost"});
+const twitchSession = await getTwitchSession({
+  clientId: "...",
+  clientSecret: "...",
+  redirectUri: "http://localhost",
+});
 ```
 
 - On initial call will help obtain `accessToken` and `refreshToken`s by providing a link to gain authorization code and wait for user input.

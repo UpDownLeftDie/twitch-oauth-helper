@@ -1,6 +1,6 @@
 {
   "name": "@updownleftdie/twitch-oauth-helper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Helps get and refresh client auth tokens",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,11 @@
   },
   "author": "UpDownLeftDie (Jared Kotoff)",
   "license": "Apache-2.0",
+  "homepage": "https://github.com/UpDownLeftDie/twitch-oauth-helper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UpDownLeftDie/twitch-oauth-helper.git"
+  },
   "dependencies": {
     "node-fetch": "^2.6.0",
     "readline-sync": "^1.4.10"
