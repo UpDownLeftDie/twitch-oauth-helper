@@ -1,6 +1,6 @@
 {
   "name": "@updownleftdie/twitch-oauth-helper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Helps get and refresh client auth tokens",
   "main": "index.js",
   "scripts": {
